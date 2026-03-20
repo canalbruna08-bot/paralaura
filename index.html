@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>6 Meses de Nós Meu Amor 💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@600&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#eaf6ff,#d6efff,#f7fcff);
+  color:#2b4a5a;
+  text-align:center;
+  overflow-x:hidden;
+  position:relative;
+}
+
+.container{
+  padding:60px 20px;
+  max-width:900px;
+  margin:auto;
+}
+
+h1{
+  font-family:'Dancing Script',cursive;
+  font-size:64px;
+  color:#2f7fbf;
+}
+
+h2{
+  font-weight:400;
+  color:#4da6d9;
+}
+
+.card{
+  background:white;
+  padding:35px;
+  margin:40px auto;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+#contador{
+  font-size:22px;
+  color:#2f7fbf;
+}
+
+.fotos{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:25px;
+}
+
+.fotos img{
+  width:170px;
+  height:170px;
+  object-fit:cover;
+  border-radius:15px;
+  border:4px solid #b8e7ff;
+}
+
+footer{
+  margin-top:50px;
+  color:#6b9db5;
+}
+
+button{
+  background:linear-gradient(135deg,#6ec6ff,#3aaeff);
+  border:none;
+  padding:14px 28px;
+  border-radius:30px;
+  color:white;
+  cursor:pointer;
+  margin-top:15px;
+  font-size:18px;
+}
+
+/* Modais */
+.carta-modal, .musicas-modal, .mensagem-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  background:rgba(20,40,60,0.4);
+  backdrop-filter:blur(6px);
+  transition:.5s;
+  z-index:999;
+}
+
+.carta-modal.aberto, .musicas-modal.aberto, .mensagem-modal.aberto{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.carta-conteudo, .musicas-conteudo, .mensagem-conteudo{
+  background:rgba(255,255,255,0.95);
+  width:90%;
+  max-width:800px;
+  padding:40px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,0.2);
+  font-family:'Quicksand', sans-serif;
+  font-size:22px;
+  line-height:1.8;
+  overflow-y:auto;
+  max-height:80vh;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carta-conteudo{
+  background:rgba(255,255,255,0.15);
+  color:white;
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.3);
+  transform: scale(0.8) translateY(40px);
+  opacity:0;
+  transition: all .6s ease;
+}
+
+.carta-modal.aberto .carta-conteudo{
+  transform: scale(1) translateY(0);
+  opacity:1;
+}
+
+/* corações animados */
+.coracao-azul{
+  position:absolute;
+  pointer-events:none;
+  color:#4db8ff;
+  opacity:0.35;
+  user-select:none;
+}
+
+/* imagens dos cantos */
+.fundo-imagem{
+  position:absolute;
+  width:20vw;
+  height:20vw;
+  max-width:200px;
+  max-height:200px;
+  border-radius:20px;
+  object-fit:cover;
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  opacity:0.95;
+  animation:flutuar 6s ease-in-out infinite;
+  border:6px solid #4db8ff;
+}
+
+@keyframes flutuar{
+  0%{ transform: translateY(0px) rotate(0deg);}
+  50%{ transform: translateY(-15px) rotate(2deg);}
+  100%{ transform: translateY(0px) rotate(0deg);}
+}
+
+/* Galeria músicas */
+.galeria{
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  justify-content:center;
+  margin-bottom:20px;
+}
+
+.galeria img{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:15px;
+  border:3px solid #4db8ff;
+  cursor:pointer;
+  transition: transform 0.3s;
+}
+
+.galeria img:hover{
+  transform: scale(1.05);
+}
+
+/* Botão inicial de play */
+#playButton{
+  padding:20px 40px;
+  font-size:22px;
+  border-radius:20px;
+  background:#3aaeff;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- Botão inicial para autoplay mobile -->
+<div id="playButtonContainer" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.95); display:flex; justify-content:center; align-items:center; z-index:9999;">
+  <button id="playButton">💙 Toque para abrir a surpresa 💙</button>
+</div>
+
+<div class="container">
+<h1>💙 6 Meses de Nós 💙</h1>
+<h2>Espero que goste dessa surpresa para você minha linda.</h2>
+
+<div class="card">
+  <h2>Estamos juntas há:</h2>
+  <p id="contador"></p>
+</div>
+
+<div class="card">
+  <p>
+    Hoje comemoramos nossos <b>6 meses de namoro</b>. Cada momento com você é especial.
+  </p>
+  <button onclick="abrirCarta()">Clique aqui 💙</button>
+  <button onclick="abrirMusicas()">Ver músicas 💙</button>
+  <button onclick="abrirMensagens()">Mensagens 💌</button>
+</div>
+
+<div class="card">
+<h2>Um pouco de nós</h2>
+<div class="fotos">
+  <img src="flor2.jpeg">
+  <img src="flor3.jpeg">
+  <img src="flor1.jpeg">
+</div>
+</div>
+
+<footer>Feito com muito amor 💙</footer>
+</div>
+
+<!-- Modal Carta -->
+<div class="carta-modal" id="cartaModal">
+  <div class="carta-conteudo">
+    <p>
+Meu Amor, você foi a melhor coisa que aconteceu comigo. Isso é só o começo de tudo que eu desejo viver com você, você é o meu mundo, minha vida, te amo eternamente. Obrigado por me mudar para melhor a cada dia, te agradeço por absolutamente tudo que você faz por mim. Você é a melhor pessoa que eu já conheci, você é incrível, linda, esperta, carinhosa, corajosa e muito mais coisas que passaria horas e horas falando e ainda não seria suficiente pra descrever a pessoa maravilhosa que você é, principalmente ao meu lado.
+    </p>
+    <button onclick="fecharCarta()">Fechar 💌</button>
+  </div>
+</div>
+
+<!-- Modal Músicas -->
+<div class="musicas-modal" id="musicasModal">
+  <div class="musicas-conteudo">
+    <div class="galeria"></div>
+    <button onclick="fecharMusicas()">Fechar 💌</button>
+  </div>
+</div>
+
+<!-- Modal Mensagens -->
+<div class="mensagem-modal" id="mensagemModal">
+  <div class="mensagem-conteudo">
+    <p id="mensagemTexto" style="transition: color 0.6s, opacity 0.6s;"></p>
+    <button onclick="proximaMensagem()">Próxima Mensagem 💖</button>
+    <button onclick="fecharMensagens()">Fechar 💌</button>
+  </div>
+</div>
+
+<!-- Áudio oculto -->
+<audio id="audioPlayer" loop></audio>
+
+<script>
+/* Contador */
+const dataNamoro = new Date("2025-09-28");
+function atualizarContador(){
+  const agora = new Date();
+  const diff = agora - dataNamoro;
+  const dias = Math.floor(diff / (1000*60*60*24));
+  const horas = Math.floor(diff / (1000*60*60) % 24);
+  const minutos = Math.floor(diff / (1000*60) % 60);
+  const segundos = Math.floor(diff / 1000 % 60);
+  document.getElementById("contador").innerHTML =
+    dias+" dias "+horas+" horas "+minutos+" minutos "+segundos+" segundos 💙";
+}
+setInterval(atualizarContador,1000);
+
+/* Modal Carta */
+const cartaModal = document.getElementById("cartaModal");
+function abrirCarta(){ cartaModal.classList.add("aberto"); }
+function fecharCarta(){ cartaModal.classList.remove("aberto"); }
+
+/* Modal Músicas */
+const musicasModal = document.getElementById("musicasModal");
+const galeria = musicasModal.querySelector(".galeria");
+const imagensMusicas = ["msc1.jpeg","msc2.jpeg","msc3.jpeg"];
+function abrirMusicas(){
+  galeria.innerHTML = "";
+  imagensMusicas.forEach(src=>{
+    const img = document.createElement("img");
+    img.src = src;
+    galeria.appendChild(img);
+  });
+  musicasModal.classList.add("aberto");
+}
+function fecharMusicas(){ musicasModal.classList.remove("aberto"); }
+
+/* Modal Mensagens */
+const mensagemModal = document.getElementById("mensagemModal");
+const mensagemTexto = document.getElementById("mensagemTexto");
+const mensagens = [
+  "Sou completamente apaixonada por você.",
+  "Você é o amor da minha vida, te quero eternamente",
+  "Estar com você são os melhores momentos da minha vida",
+  "Te amo mais que qualquer definição de amor",
+  "Obrigado por ser parte da minha alma."
+];
+const cores = ["#FF69B4","#4db8ff","#FF6347","#9370DB","#FFA500"];
+function abrirMensagens(){ proximaMensagem(); mensagemModal.classList.add("aberto"); }
+function fecharMensagens(){ mensagemModal.classList.remove("aberto"); }
+function proximaMensagem(){
+  const idx = Math.floor(Math.random()*mensagens.length);
+  mensagemTexto.style.opacity = 0;
+  setTimeout(()=>{
+    mensagemTexto.textContent = mensagens[idx];
+    mensagemTexto.style.color = cores[idx];
+    mensagemTexto.style.opacity = 1;
+  },300);
+}
+
+/* Corações Animados */
+let coracoesAtivos = 0;
+const MAX_CORACOES = 30;
+function criarCoracaoAzul(){
+  if(coracoesAtivos>=MAX_CORACOES) return;
+  coracoesAtivos++;
+  const cor = document.createElement("div");
+  cor.textContent="💙";
+  cor.className="coracao-azul";
+  cor.style.left = Math.random()*window.innerWidth + "px";
+  cor.style.top = Math.random()*window.innerHeight + "px";
+  cor.style.fontSize = (15 + Math.random()*20) + "px";
+  document.body.appendChild(cor);
+  let velocidade = 0.2 + Math.random()*0.5;
+  let deslocX = (Math.random()*2 - 1)*0.3;
+  function anim(){
+    const top = parseFloat(cor.style.top);
+    const left = parseFloat(cor.style.left);
+    cor.style.top = (top - velocidade) + "px";
+    cor.style.left = (left + deslocX) + "px";
+    if(top < -50){
+      cor.style.top = window.innerHeight + "px";
+      cor.style.left = Math.random()*window.innerWidth + "px";
+    }
+    requestAnimationFrame(anim);
+  }
+  anim();
+  setTimeout(()=>{ cor.remove(); coracoesAtivos--; },20000);
+}
+setInterval(criarCoracaoAzul,500);
+
+/* Imagens dos Cantos */
+const imagens = ["foto1.jpeg","foto2.jpeg","foto3.jpeg","foto4.jpeg"];
+const posicoes = [
+  {top:"3%", left:"3%"},
+  {top:"3%", right:"3%"},
+  {bottom:"3%", left:"3%"},
+  {bottom:"3%", right:"3%"}
+];
+posicoes.forEach((pos,i)=>{
+  const img=document.createElement("img");
+  img.src=imagens[i];
+  img.className="fundo-imagem";
+  Object.keys(pos).forEach(k=>{ img.style[k]=pos[k]; });
+  document.body.appendChild(img);
+});
+
+/* Áudio automático tocando após clique no botão */
+const playlist = ["msc1.mp3","msc2.mp3","msc3.mp3"];
+let indexAudio = 0;
+const player = document.getElementById("audioPlayer");
+
+const playButton = document.getElementById("playButton");
+const playButtonContainer = document.getElementById("playButtonContainer");
+
+playButton.addEventListener("click", () => {
+    player.src = playlist[indexAudio];
+    player.volume = 0.5;
+    player.play();
+    playButtonContainer.style.display = "none";
+});
+
+player.addEventListener("ended", ()=>{
+  indexAudio++;
+  if(indexAudio >= playlist.length) indexAudio = 0;
+  player.src = playlist[indexAudio];
+  player.play();
+});
+</script>
+</body>
+</html>
